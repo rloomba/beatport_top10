@@ -1,36 +1,39 @@
-<!DOCTYPE HTML>
+
 <html lang="en-US">
 <head>
 		<meta charset="UTF-8">
 		<title>Beatport Top Ten's</title>
-		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
 </head>
 <body>
-	<div class="bs-docs-example">
-            <table class="table table-striped">
+  
+	<div class="table_container">
+            <% @genre_data_hash.each do |key, value|%>
+            <table style="float:left;">
               <thead>
                 <tr>
-                  <% @genres_hash.each do |genre, *|%>
-                  <th><%= genre %></th>
-                  <% end %>
+                  <th><%= key %></th>
                 </tr>
               </thead>
               <tbody>
-                <% @genre_data_hash.each do |key, value| %>
-                 <% value["results"].each do |one| %> 
+                <% value["results"].each do |one| %>
                 <tr>
+                  
                   <td><%= one["position"]%> <br>
                     <%= one["title"]%> <br>
                     <% one["artists"].each do |artist| %>
                     <%= artist["name"]%>
                     <%= "," unless artist == one["artists"].last %>
+                    <% end %> <br>
+                    <%= one["label"]["name"] %>
                     <% end %>
                   </td>
                 </tr>
-                <% end %>
-                <% end %>
               </tbody>
             </table>
+           <% end %> 
           </div>
+
+
 </body>
 </html>
